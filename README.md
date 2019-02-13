@@ -4,10 +4,10 @@ Cisco IOS utilities, includes:
 ## Serial
 Used for configuring your cisco device trough the serial port.
 
-** Features: **
+**Features:**
 
-* ** Controled pasting:**  each line is pasted one at the time so it avoids common pasting  problems when doing it through serial port
-* ** Waits for the input further options to keep pasting: ** useful when a large configuration text is pasted that includes commands like "license accept end user agreement" that asks [yes/no]: and there are other commands left to paste after this one without this the commands left are pasted as answers  to  [yes/no]: making them useless 
+* **Controled pasting:**  each line is pasted one at the time so it avoids common pasting  problems when doing it through serial port
+* **Waits for the input further options to keep pasting:** useful when a large configuration text is pasted that includes commands like "license accept end user agreement" that asks [yes/no]: and there are other commands left to paste after this one without this the commands left are pasted as answers  to  [yes/no]: making them useless 
 * **List of serial ports available on the preferences**
 * **Paste cancel:** if you press CTRL+C when pasting it will stop
 * **DEL working properly**
