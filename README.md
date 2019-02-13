@@ -15,7 +15,7 @@ Used for configuring your cisco device trough the serial port.
 ## Compare
 Utility for comparing a current configuration with a target configuration (must have the same format as the show running/startup commands of the Cisco IOS).
 
-** Color code: **
+**Color code:**
 
 * **RED:**     ERROR  (no match)
 * **YELLOW:**  CARFUL (may be a encripted string or something router specific that prevents matching)
