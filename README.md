@@ -27,7 +27,7 @@ There may be other uses since it compares the lines and configuration modes with
 -java jre 8 or higher
 
 ## Versioning
-Using [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://gitlab.com/Federico-Ciuffardi/revamp-framework/tags). 
+Using [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/Federico-Ciuffardi/IOSU/releases). 
 
 ## Authors
 * Federico Ciuffardi
