@@ -1,3 +1,26 @@
+/*
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ *
+ * Copyright (C) 2019  Federico Ciuffardi
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Please contact me (federico.ciuffardi@outlook.com) if you need 
+ * additional information or have any questions.
+ */
+
+
 package gui;
 
 import javax.swing.JFrame;
@@ -8,11 +31,9 @@ import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 import java.awt.Insets;
-
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
@@ -22,7 +43,13 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.JTextPane;
 import javax.swing.JComboBox;
+
+/*
+ * JInternalFrame that provides a graphical interface for the preferences
+ */
+
 class PreferencesIF extends JInternalFrame{
+	
 	static MainFrame mainFrame = MainFrame.getInstance();
 	private static final long serialVersionUID = 1L;
 	private static PreferencesIF instance = null;
@@ -39,13 +66,14 @@ class PreferencesIF extends JInternalFrame{
 			instance.init();
 		}
 	}
+	
 	private PreferencesIF() {
 		prefs = new Prefs("conf-comp");
 		prefs.setDefault("SerialID", "/dev/ttyS0");
 		firstTimeInit();
 	}
+	
 	private void firstTimeInit() {
-		
 		setTitle("Preferences");
 		setResizable(true);
 		setIconifiable(true);
@@ -192,9 +220,9 @@ class PreferencesIF extends JInternalFrame{
         	}
         });
         mainFrame.getContentPane().add(this);
-        init();
-        
+        init(); 
 	}
+	
 	public void init() {
 		reload();
         setVisible(true);
@@ -206,6 +234,7 @@ class PreferencesIF extends JInternalFrame{
 		}
         moveToFront();
 	}
+	
 	private void reload() {
 		textFieldSerialLine.setText( prefs.get("SerialID"));
         String[] apd = serial.PortsHandler.getInstance().getAvailablePortsDescription();
@@ -224,4 +253,5 @@ class PreferencesIF extends JInternalFrame{
             }
         }
 	}
+	
 }

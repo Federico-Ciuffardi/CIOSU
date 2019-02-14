@@ -1,3 +1,26 @@
+/*
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ *
+ * Copyright (C) 2019  Federico Ciuffardi
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Please contact me (federico.ciuffardi@outlook.com) if you need 
+ * additional information or have any questions.
+ */
+
+
 package gui;
 
 import java.util.prefs.Preferences;
@@ -17,6 +40,10 @@ import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
 import com.github.federico_ciuffardi.util.BinSemaphore;
 
+/*
+ * JInternalFrame provides a graphical interface the configuration through the serial port
+ */
+
 class ConfigureIF extends JInternalFrame{
 	
 	static MainFrame mainFrame = MainFrame.getInstance();
@@ -24,7 +51,7 @@ class ConfigureIF extends JInternalFrame{
 	private static final long serialVersionUID = 1L;
 	private JTextArea ConsoleTextArea;
 	private serial.Port serialPort;
-	private String consoleText=" ";
+	private String cliText=" ";
 	private int cursorPos = 0;
 	private BinSemaphore bSem;
 	
@@ -35,9 +62,11 @@ class ConfigureIF extends JInternalFrame{
 			instance.init();
 		}
 	}
+	
 	private ConfigureIF() {
 		firstTimeInit();
 	}
+	
 	private void init() {
 		Preferences prefs =  Preferences.userRoot().node("conf-comp");
 		String serialID = prefs.get("SerialID","/dev/ttyS0");
@@ -67,6 +96,7 @@ class ConfigureIF extends JInternalFrame{
 			}
 		}
 	}
+	
 	private void firstTimeInit() {
 		setTitle("Console");
 		setResizable(true);
@@ -94,6 +124,7 @@ class ConfigureIF extends JInternalFrame{
 		ConsoleTextArea.setFocusTraversalKeysEnabled(false);
 		init();
 	}
+	//thread used for receiving and handling all the incoming bytes on the serial port 
 	Thread serialReadHandler = new Thread() {
 		@Override
 		public void run() {
@@ -102,43 +133,49 @@ class ConfigureIF extends JInternalFrame{
 			   while (true){
 			      byte[] readBuffer = serialPort.receive();
 			      for(byte b:readBuffer) {
-			    	  consoleProcess(b);
+			    	  process(b);
 			      }
-			      update1();
+			      updateCli();
 			   }
 			} catch (Exception e) {
 				e.printStackTrace(); 
 			}
 		}
 	};
-	private void consoleProcess(byte b) {
-		if(b== 37 && KeyboardListener.pasting) {
-				//error or warning 
-		}
-		if((b==35 || b == 62)  && KeyboardListener.pasting) {
-			bSem.release();
-		}
+	//processes a received byte
+	private void process(byte b) {
 		if(b==8) {//Backspace
+			//move cursor backwards if possible
 			if(cursorPos>0) {
 				cursorPos--;
 			}  
 		}else if(b==7){//Bell
 		  //sound or something
 		}else {
-			if(b==13) {
-			  cursorPos =consoleText.length(); 
+			if(b==13) {//CR
+				//get cursor to the right preparing for a line jump
+				cursorPos =cliText.length(); 
 			}
-			String aux1 = consoleText.substring(0,cursorPos);
+			if(b== 37) {// %
+				//usually error or warning for the user to check so something can be done here
+			}
+			if((b==35 || b == 62)  && KeyboardListener.pasting) {// # or > and pasting
+				//signal for the next line to be pasted
+				bSem.release();
+			}
+			//add b to the cli text according to the cursor it also updates the cursor position
+			String aux1 = cliText.substring(0,cursorPos);
 			String aux2 = " ";
-			if(cursorPos+1<consoleText.length()) {
-				aux2 = consoleText.substring(cursorPos+1);
+			if(cursorPos+1<cliText.length()) {
+				aux2 = cliText.substring(cursorPos+1);
 			}
-			consoleText = aux1+(char)b+aux2;
+			cliText = aux1+(char)b+aux2;
 			cursorPos++;	  
 		  }
 	}
-	private void update1() {
-		ConsoleTextArea.setText(consoleText);
+	//Updates the Cli on the screen
+	private void updateCli() {
+		ConsoleTextArea.setText(cliText);
 		ConsoleTextArea.setCaretPosition(ConsoleTextArea.getText().length());
 		Highlighter h = ConsoleTextArea.getHighlighter();
 		h.removeAllHighlights();
@@ -151,6 +188,7 @@ class ConfigureIF extends JInternalFrame{
 			e.printStackTrace();
 		}
 	}
+	//So the port closes when closing the JInternalFrame
 	@Override
     protected void fireInternalFrameEvent(int id) {
         if (id == InternalFrameEvent.INTERNAL_FRAME_CLOSING) {
@@ -158,4 +196,5 @@ class ConfigureIF extends JInternalFrame{
         }
         super.fireInternalFrameEvent(id);
     }
+	
 }

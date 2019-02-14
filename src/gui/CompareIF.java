@@ -1,9 +1,30 @@
+/*
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ *
+ * Copyright (C) 2019  Federico Ciuffardi
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Please contact me (federico.ciuffardi@outlook.com) if you need 
+ * additional information or have any questions.
+ */
+
 package gui;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import java.awt.GridBagLayout;
@@ -11,27 +32,22 @@ import javax.swing.JScrollPane;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.io.IOException;
-
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
-
 import comp.DtComp;
 import comp.DtFullComp;
 import comp.Factory;
 import comp.ICtrlComp;
 import comp.State;
-
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
-
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
@@ -39,8 +55,13 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.Font;
 
+/*
+ * JInternalFrame that provides a graphical interface for the configuration comparison
+ */
+
 class CompareIF extends JInternalFrame{
-	static MainFrame mainFrame = MainFrame.getInstance();
+	
+	private static MainFrame mainFrame = MainFrame.getInstance();
 	private static final long serialVersionUID = 1L;
 	private Path currentPath;
 	private Path targetPath;
@@ -50,10 +71,12 @@ class CompareIF extends JInternalFrame{
 	static void open() {
 		new CompareIF();
 	}
+	
 	private CompareIF() {
 		setTitle("NO FILE SELECTED == NO FILE SELECTED");
 		init();
 	}
+	
 	private void init() {
 		setResizable(true);
 		setIconifiable(true);
@@ -234,12 +257,14 @@ class CompareIF extends JInternalFrame{
 		DtFullComp dtFullComp = iCtrlComp.fullComp(currentTextArea.getText(),targetTextArea.getText());
 		displayFullComp(dtFullComp);
 	}
+	
 	private void displayFullComp(DtFullComp dtFullComp) {
 		DtComp[] cComp = dtFullComp.getCurrentComp();
 		DtComp[] tComp =  dtFullComp.getTargetComp();
 		setCompOnJTextArea(cComp, currentTextArea);
 		setCompOnJTextArea(tComp, targetTextArea);
 	}
+	
 	private void setCompOnJTextArea(DtComp[] comp, JTextArea JTA) {
 		int cpos = JTA.getCaretPosition();
 		JTA.setText("");
@@ -266,6 +291,7 @@ class CompareIF extends JInternalFrame{
 		}
 		JTA.setCaretPosition(cpos);
 	}
+	
 	private void highlight(Highlighter h,int startPos,int endPos, Color color ) {
 		try {
 			h.addHighlight(startPos,endPos,new DefaultHighlighter.DefaultHighlightPainter(color));
@@ -273,7 +299,8 @@ class CompareIF extends JInternalFrame{
 			e.printStackTrace();
 		}
 	}
-	void setCurrentPath(String newCurrentPath){
+	
+	private void setCurrentPath(String newCurrentPath){
 		currentPath = Paths.get(newCurrentPath);
 		if(targetPath != null) {
 			setTitle(currentPath.getFileName()+" == "+targetPath.getFileName());
@@ -281,7 +308,8 @@ class CompareIF extends JInternalFrame{
 			setTitle(currentPath.getFileName()+" == NO FILE SELECTED");
 		}
 	}
-	void setTargetPath(String newTargetPath){
+	
+	private void setTargetPath(String newTargetPath){
 		targetPath = Paths.get(newTargetPath);
 		if(currentPath != null) {
 			setTitle(currentPath.getFileName()+" == "+targetPath.getFileName());
@@ -289,4 +317,5 @@ class CompareIF extends JInternalFrame{
 			setTitle("NO FILE SELECTED == "+targetPath.getFileName());
 		}
 	}
+	
 }
