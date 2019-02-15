@@ -80,6 +80,7 @@ class AboutIF extends JInternalFrame{
         txtpnUsedForConfiguring_1.setEditable(false);
         txtpnUsedForConfiguring_1.setFont(new Font("Dialog", Font.PLAIN, 16));
         txtpnUsedForConfiguring_1.setText("Used for configuring your cisco device trough the serial port.\n\nFeatures \n\n* Controled pasting:  each line is pasted one at the time so it evoids common pasting  problems when doing it through serial port\n* Waits for you to input further options to keep pasting: usefull when a large configuration text is pasted that includes commands like \"license accept end user agreement\" that asks [yes/no]: and there are other comands left to paste after this one without this the commands left are pasted as answers  to  [yes/no]: making them useless \n* List of serial ports availables on the prerences to help you to configure the serial line properly\n* Paste cancel: if you press CTRL+C when pasting it will stop\n* DEL working properly");
+        txtpnUsedForConfiguring_1.setCaretPosition(0);
         scrollPane.setViewportView(txtpnUsedForConfiguring_1);
         
         JPanel panel_1 = new JPanel();
@@ -92,7 +93,8 @@ class AboutIF extends JInternalFrame{
         JTextPane txtpnUtilityForComparing = new JTextPane();
         scrollPane_1.setViewportView(txtpnUtilityForComparing);
         txtpnUtilityForComparing.setFont(new Font("Dialog", Font.PLAIN, 16));
-        txtpnUtilityForComparing.setText("Utility for comparing a current configuration with a target configuration (must have the same format as the show running/startup commands of the Cisco IOS).\n-\nColor code:\n* RED:     ERROR  (no match)\n* YELLOW:  CARFUL (may be a encripted string or something router specific that prevents matching) (may have to add some more exceptions on the future)\n* GREEN:   OK     (it matches)\n-\nThere may be other uses since it compares the lines and configuration modes without order, the configuration mode of a line beeing the global configuration mode if it has no indentation, else the configuration mode is the nearest line without indentation.\n");
+        txtpnUtilityForComparing.setText("Utility for comparing a current configuration with a target configuration (must have the same format as the show running/startup commands of the Cisco IOS).\n-\nHow to use:\nPaste or open the current  configuration (the one you are working on the device) do the same with the taget configuration (the one you want to configure your device with) then press update (on the bottom of the comparison internal frame) to compare. Then you can  edit both of the configurations you will have to press update to compare again after mofications take place.\n-\nColor code:\n* RED:     ERROR  (no match)\n* YELLOW:  CARFUL (may be a encripted string or something router specific that prevents matching) (may have to add some more exceptions on the future)\n* GREEN:   OK     (it matches)\n-\nThere may be other uses since it compares the lines and configuration modes without order, the configuration mode of a line beeing the global configuration mode if it has no indentation, else the configuration mode is the nearest line without indentation.\n");
+        txtpnUtilityForComparing.setCaretPosition(0);
         txtpnUtilityForComparing.setEditable(false);
         
         JPanel panel_2 = new JPanel();
