@@ -69,7 +69,14 @@ class PreferencesIF extends JInternalFrame{
 	
 	private PreferencesIF() {
 		prefs = new Prefs("conf-comp");
-		prefs.setDefault("SerialID", "/dev/ttyS0");
+		if(System.getProperty("os.name").toLowerCase().contains("win")) {
+			prefs.setDefault("SerialID", "COM1");
+		}else if(System.getProperty("os.name").toLowerCase().contains("mac")){
+			prefs.setDefault("SerialID", "tty.usbserial-FTKVMAFF");
+		}else {
+			prefs.setDefault("SerialID", "/dev/ttyS0");
+		}
+		
 		firstTimeInit();
 	}
 	

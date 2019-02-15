@@ -63,7 +63,7 @@ class AboutIF extends JInternalFrame{
 		setMaximizable(true);
 		setClosable(true);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        setBounds(30, 30,526,365);
+        setBounds(30, 30,526,410);
         getContentPane().setLayout(new BorderLayout(0, 0));
         
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
