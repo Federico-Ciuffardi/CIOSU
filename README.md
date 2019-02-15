@@ -1,5 +1,5 @@
 # CIOSU
-Cisco IOS utilities, includes:
+Cisco IOS Utilities, includes:
 
 ### Serial
 Used for configuring your cisco device trough the serial port.
