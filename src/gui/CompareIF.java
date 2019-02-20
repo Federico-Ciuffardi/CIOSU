@@ -108,12 +108,13 @@ class CompareIF extends JInternalFrame{
         sToSPanel.add(sToSScrollPane, gbc_scrollPane);
         
         currentTextArea = new JTextArea();
+        currentTextArea.setToolTipText("Paste or open from a file (from the menu Current->Open) the current configuration\nthen press update to compare.");
         currentTextArea.setFont(new Font("Garuda", Font.PLAIN, 16));
         sToSScrollPane.setViewportView(currentTextArea);
        
         currentTextArea.setCaretPosition(0);
         
-        JLabel lblCurrent = new JLabel("Current");
+        JLabel lblCurrent = new JLabel("Current configuration");
         sToSScrollPane.setColumnHeaderView(lblCurrent);
         
         JScrollPane scrollPane_1 = new JScrollPane();
@@ -124,12 +125,13 @@ class CompareIF extends JInternalFrame{
         sToSPanel.add(scrollPane_1, gbc_scrollPane_1);
         
         targetTextArea = new JTextArea();
+        targetTextArea.setToolTipText("Paste or open from a file (from the menu Target->Open) the target configuration\nthen press update to compare.");
         targetTextArea.setFont(new Font("Garuda", Font.PLAIN, 16));
         scrollPane_1.setViewportView(targetTextArea);
         
         targetTextArea.setCaretPosition(0);
         
-        JLabel lblTarget = new JLabel("Target");
+        JLabel lblTarget = new JLabel("Target configuration\n\n");
         scrollPane_1.setColumnHeaderView(lblTarget);
 		JButton updateButton = new JButton("Update");
 		updateButton.addActionListener(new ActionListener() {

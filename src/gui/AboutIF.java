@@ -106,7 +106,7 @@ class AboutIF extends JInternalFrame{
         
         JTextPane txtpnIosu = new JTextPane();
         txtpnIosu.setEditable(false);
-        txtpnIosu.setText("IOSU-2019");
+        txtpnIosu.setText("CIOSU - 2019");
         scrollPane_2.setViewportView(txtpnIosu);
         mainFrame.getContentPane().add(this);
         init();

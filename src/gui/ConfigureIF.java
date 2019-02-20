@@ -72,7 +72,7 @@ class ConfigureIF extends JInternalFrame{
 		String serialID = prefs.get("SerialID","/dev/ttyS0");
 		serialPort = serial.PortsHandler.getInstance().open(serialID);
 		if(serialPort == null) {
-			JOptionPane.showMessageDialog(this, "Serial Port error\nalready on use?\nhave privilege?\n", "ERROR", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Serial Port error\nis the correct port? (you can change it in the preferences)\nis already on use?\nCIOSU has privilege to use it?\n", "ERROR", JOptionPane.ERROR_MESSAGE);
 		}else {
 			bSem = new BinSemaphore();
 			if(!serialReadHandler.isAlive()) {//only once

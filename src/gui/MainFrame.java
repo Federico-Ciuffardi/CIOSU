@@ -66,7 +66,7 @@ class MainFrame extends JFrame{
 	
 	private MainFrame() {
 		setContentPane(new JDesktopPane());
-		setTitle("IOSU");
+		setTitle("CIOSU");
 		setBounds(100, 100, 600, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
