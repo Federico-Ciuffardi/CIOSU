@@ -6,11 +6,11 @@ CIOSU provides a console to configure a cisco device trough the serial port.
 
 **Features:**
 
-* **Controled pasting:**  Pasting speed is controlled to prevent common pasting problems that could arise when using the serial port.
+* **Controled paste:**  Pasting speed is controlled to prevent common pasting problems that could arise when using the serial port.
 * **Waits for the user input on the commands that require it**
 * **List of serial ports available on the preferences**
 * **Cancel the Paste:** if you press CTRL+C when pasting it will stop
-* **DEL working properly**
+* **DEL works correctly**
 
 ### Compare
 Utility to compare two configurations (with the same format as the show running/startup commands of the Cisco IOS).
