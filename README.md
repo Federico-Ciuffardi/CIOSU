@@ -1,5 +1,5 @@
 # CIOSU
-Cisco IOS Utilitie
+Cisco IOS Utilities
 
 ### Serial
 CIOSU provides a console to configure a cisco device trough the serial port.
